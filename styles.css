@@ -239,11 +239,7 @@ a:has(> .gh-chart) {
   width: 100%;
   height: auto;
   display: block;
-  /* the chart image only comes in GitHub's light theme; invert + hue-rotate
-     turns the empty squares dark while keeping the greens green */
-  filter: invert(1) hue-rotate(180deg) saturate(1.15);
   border-radius: 4px;
-  padding: 0.8rem;
 }
 
 /* ---------- projects / cards ---------- */
