@@ -171,7 +171,7 @@ main { max-width: 880px; margin: 0 auto; padding: 0 1.25rem 3rem; }
   border: 1px solid var(--border);
   border-radius: 8px;
   cursor: crosshair;
-  touch-action: manipulation;
+  touch-action: none;
 }
 .demo-controls {
   display: flex;
@@ -249,7 +249,8 @@ button:hover { background: #2ea043; }
   flex-wrap: wrap;
   gap: 0.55rem;
 }
-.skill-list li {
+.skill-list li { display: contents; }
+.skill-chip {
   font-family: var(--mono);
   font-size: 0.85rem;
   background: var(--bg-soft);
@@ -257,7 +258,22 @@ button:hover { background: #2ea043; }
   border-radius: 999px;
   padding: 0.3rem 0.85rem;
   color: var(--text-bright);
+  cursor: pointer;
 }
+.skill-chip:hover { background: #21262d; border-color: var(--muted); }
+.skill-chip.active { border-color: var(--green); color: var(--green); }
+.skill-detail {
+  margin-top: 0.95rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+}
+.skill-detail h3 { margin: 0 0 0.4rem; font-family: var(--mono); font-size: 0.95rem; color: var(--text-bright); }
+.skill-detail ul { margin: 0; padding-left: 1.1rem; }
+.skill-detail li { margin-bottom: 0.3rem; font-size: 0.94rem; }
+.skill-detail p { margin: 0; font-size: 0.94rem; }
+.skill-hint { color: var(--muted); }
 .contact-list { list-style: none; padding: 0; margin: 0; font-size: 1rem; }
 .contact-list li { margin-bottom: 0.5rem; font-family: var(--mono); font-size: 0.92rem; }
 .contact-label { color: var(--green); display: inline-block; min-width: 5.5em; }

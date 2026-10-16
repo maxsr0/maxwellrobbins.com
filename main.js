@@ -5,9 +5,8 @@
   /* ================= 1. Boot / typing animation ================= */
   var bootLines = [
     "$ whoami",
-    "maxwell_robbins — CS @ University of Cincinnati '31",
-    "// co-founder, Prism Robotics · seeking Summer 2027 co-op",
-    "// type 'help' below — the terminal actually works"
+    "maxwell_robbins · CS @ University of Cincinnati '31",
+    "// co-founder, Prism Robotics · seeking Summer 2027 co-op"
   ];
   var boot = document.getElementById("boot");
   if (boot) {
@@ -37,8 +36,7 @@
   var input = document.getElementById("term-input");
   var replies = {
     help:
-      "commands: about · projects · skills · contact · socials · resume · clear\n" +
-      "(psst — the path planner demo further down is clickable)",
+      "commands: about · projects · skills · contact · socials · resume · clear",
     about:
       "CS freshman at the University of Cincinnati (co-op program, class of 2031).\n" +
       "Co-founder of Prism Robotics, a 501(c)(3) VEX U team. I build robot software\n" +
@@ -46,11 +44,11 @@
       "Also: certified VEX Event Partner + Head Referee; mentor to 35+ middle\n" +
       "schoolers (350+ hours).",
     projects:
-      "path-planner  — hermite spline routing for VEX U (Python)\n" +
-      "prism-robotics — React site for our 501(c)(3) VEX U team\n" +
-      "league-bot    — Discord bot, scaled a community to 1,500+ members\n" +
-      "plant-monitor — desktop app + firmware sensor project\n" +
-      "scroll to ~/projects, or try the live demo at ~/path-planner",
+      "path-planner: hermite spline routing for VEX U (Python)\n" +
+      "prism-robotics: React site for our 501(c)(3) VEX U team\n" +
+      "league-bot: Discord bot, scaled a community to 1,500+ members\n" +
+      "plant-monitor: desktop app + firmware sensor project\n" +
+      "scroll to ~/projects, or try the demo at ~/path-planner",
     skills:
       "Java · Python · C++ · JavaScript · React · HTML/CSS · MongoDB · SQL · Git",
     contact:
@@ -60,10 +58,10 @@
     socials:
       "github:   github.com/maxsr0\n" +
       "linkedin: linkedin.com/in/maxwell-robbins\n" +
-      "chess:    chess.com — bestplayerduck (~1550, climbing)",
+      "chess:    chess.com, around 1550 and climbing",
     resume:
-      "resume.pdf lands here at launch. Until then, linkedin.com/in/maxwell-robbins\n" +
-      "has the whole story, and the terminal command 'projects' has the fun parts."
+      "resume.pdf is linked down in ~/contact. The short version is in 'projects'\n" +
+      "and 'about' right here."
   };
 
   function runCommand() {
@@ -78,7 +76,7 @@
       echo.className = "echo";
       echo.textContent = "> " + raw;
       var resp = document.createElement("div");
-      resp.textContent = replies[v] || "command not found: '" + v + "' — try 'help'";
+      resp.textContent = replies[v] || "command not found: '" + v + "'. try 'help'";
       out.appendChild(echo);
       out.appendChild(resp);
     }
@@ -124,7 +122,7 @@
       return result;
     }
 
-    function draw(dot) {
+    function draw(dot, next) {
       ctx.clearRect(0, 0, W, H);
       // field grid
       ctx.strokeStyle = "#21262d";
@@ -149,11 +147,20 @@
         ctx.beginPath(); ctx.arc(p.x, p.y, 6, 0, 7); ctx.fill();
         ctx.strokeStyle = "#0d1117"; ctx.stroke();
       });
-      // robot dot
+      // robot: a little square, rotated to face its heading
       if (dot) {
+        var ang = next ? Math.atan2(next.y - dot.y, next.x - dot.x) : 0;
+        ctx.save();
+        ctx.translate(dot.x, dot.y);
+        ctx.rotate(ang);
         ctx.fillStyle = "#7ee787";
-        ctx.beginPath(); ctx.arc(dot.x, dot.y, 10, 0, 7); ctx.fill();
-        ctx.strokeStyle = "#0d1117"; ctx.lineWidth = 2; ctx.stroke(); ctx.lineWidth = 1;
+        ctx.fillRect(-9, -9, 18, 18);
+        ctx.strokeStyle = "#0d1117"; ctx.lineWidth = 2;
+        ctx.strokeRect(-9, -9, 18, 18);
+        ctx.fillStyle = "#0d1117";
+        ctx.fillRect(3, -3, 5, 6);
+        ctx.restore();
+        ctx.lineWidth = 1;
       }
       var counter = document.getElementById("pt-count");
       if (counter) counter.textContent = pts.length + " waypoints · catmull-rom spline (demo)";
@@ -161,13 +168,37 @@
 
     draw(null);
 
-    cv.addEventListener("click", function (e) {
+    // points are click-and-draggable; clicking empty field adds a new one
+    var dragIdx = -1;
+    function evtPos(e) {
       var r = cv.getBoundingClientRect();
-      pts.push({
+      return {
         x: (e.clientX - r.left) * (W / r.width),
         y: (e.clientY - r.top) * (H / r.height)
-      });
+      };
+    }
+    cv.addEventListener("pointerdown", function (e) {
+      var p = evtPos(e);
+      dragIdx = -1;
+      for (var i = 0; i < pts.length; i++) {
+        var dx = pts[i].x - p.x, dy = pts[i].y - p.y;
+        if (dx * dx + dy * dy < 24 * 24) { dragIdx = i; break; }
+      }
+      if (dragIdx === -1) {
+        pts.push(p);
+        dragIdx = pts.length - 1;
+      }
+      if (cv.setPointerCapture) cv.setPointerCapture(e.pointerId);
       draw(null);
+    });
+    cv.addEventListener("pointermove", function (e) {
+      if (dragIdx >= 0) {
+        pts[dragIdx] = evtPos(e);
+        draw(null);
+      }
+    });
+    ["pointerup", "pointercancel"].forEach(function (ev) {
+      cv.addEventListener(ev, function () { dragIdx = -1; });
     });
 
     var clearBtn = document.getElementById("clear-btn");
@@ -183,8 +214,9 @@
       if (anim) cancelAnimationFrame(anim);
       var i = 0;
       (function step() {
-        draw(samples[Math.min(Math.floor(i), samples.length - 1)]);
-        i += 1.8;
+        var idx = Math.min(Math.floor(i), samples.length - 1);
+        draw(samples[idx], samples[Math.min(idx + 1, samples.length - 1)]);
+        i += 0.85;
         if (i < samples.length) anim = requestAnimationFrame(step);
       })();
     });
@@ -212,7 +244,7 @@
           a.textContent = repo.name;
           h.appendChild(a);
           var p = document.createElement("p");
-          p.textContent = repo.description || "No description — the code speaks for itself.";
+          p.textContent = repo.description || "No description.";
           var meta = document.createElement("div");
           meta.className = "gh-meta";
           var pushed = new Date(repo.pushed_at);
@@ -226,23 +258,71 @@
       })
       .catch(function () {
         strip.innerHTML =
-          '<p class="gh-fallback">Couldn\'t reach the GitHub API just now — ' +
-          'my latest work is at <a href="https://github.com/maxsr0" target="_blank" rel="noopener">' +
+          '<p class="gh-fallback">Couldn\'t reach the GitHub API just now. ' +
+          'My latest work is at <a href="https://github.com/maxsr0" target="_blank" rel="noopener">' +
           "github.com/maxsr0</a>.</p>";
       });
   }
 
-  /* ================= 5. Worlds countdown ================= */
-  var status = document.getElementById("worlds-status");
-  if (status) {
-    var worlds = new Date(2027, 3, 24); // April 24, 2027 (displayed as "April 2027")
-    var now = new Date();
-    var days = Math.ceil((worlds - now) / (1000 * 60 * 60 * 24));
-    if (days > 0) {
-      status.textContent =
-        "// status: worlds — April 2027 · T-minus " + days + " days · prism fundraising: open";
-    } else {
-      status.textContent = "// status: worlds season — April 2027 · it's go time";
-    }
-  }
+  /* ================= 5. Clickable skills ================= */
+  var skillData = {
+    java:       { label: "Java", items: [], note: "Mostly coursework so far. Projects land here as I add them." },
+    python:     { label: "Python", items: [
+      { name: "path-planner", url: "https://github.com/maxsr0/path-planner", blurb: "Hermite spline routing for VEX U robots" }
+    ] },
+    cpp:        { label: "C++", items: [], note: "What our VEX robots run on (PROS). That code lives with the team." },
+    javascript: { label: "JavaScript", items: [
+      { name: "league-bot", blurb: "Discord bot for a 1,500+ member Rocket League community" },
+      { name: "prism-robotics site", url: "https://prismrobotics.org", blurb: "Team website and sponsorship pages" }
+    ] },
+    react:      { label: "React", items: [
+      { name: "prism-robotics site", url: "https://prismrobotics.org", blurb: "Team info, technical portfolio, sponsor outreach" }
+    ] },
+    htmlcss:    { label: "HTML/CSS", items: [
+      { name: "prism-robotics site", url: "https://prismrobotics.org", blurb: "Team info, technical portfolio, sponsor outreach" },
+      { name: "this site", blurb: "Plain HTML and CSS, no framework" }
+    ] },
+    mongodb:    { label: "MongoDB", items: [
+      { name: "league-bot", blurb: "Backend for brackets, stats, and members" }
+    ] },
+    sql:        { label: "SQL", items: [], note: "Coursework and small projects so far." },
+    git:        { label: "Git", items: [], note: "Every project on this page lives in Git." }
+  };
+  var detail = document.getElementById("skill-detail");
+  var chips = document.querySelectorAll(".skill-chip");
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      chips.forEach(function (c) { c.classList.remove("active"); });
+      chip.classList.add("active");
+      var d = skillData[chip.getAttribute("data-skill")];
+      if (!d || !detail) return;
+      detail.innerHTML = "";
+      var h = document.createElement("h3");
+      h.textContent = d.label;
+      detail.appendChild(h);
+      if (d.items.length) {
+        var ul = document.createElement("ul");
+        d.items.forEach(function (it) {
+          var li = document.createElement("li");
+          if (it.url) {
+            var a = document.createElement("a");
+            a.href = it.url;
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.textContent = it.name;
+            li.appendChild(a);
+            li.appendChild(document.createTextNode(": " + it.blurb));
+          } else {
+            li.textContent = it.name + ": " + it.blurb;
+          }
+          ul.appendChild(li);
+        });
+        detail.appendChild(ul);
+      } else {
+        var p = document.createElement("p");
+        p.textContent = d.note || "";
+        detail.appendChild(p);
+      }
+    });
+  });
 })();

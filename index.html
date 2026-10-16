@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maxwell Robbins — CS @ UC, Prism Robotics</title>
-<meta name="description" content="Maxwell Robbins — Computer Science freshman at the University of Cincinnati (co-op, class of 2031), co-founder of Prism Robotics. Seeking a Summer 2027 software co-op.">
+<title>Maxwell Robbins · CS @ UC, Prism Robotics</title>
+<meta name="description" content="Maxwell Robbins: Computer Science freshman at the University of Cincinnati (co-op, class of 2031), co-founder of Prism Robotics. Seeking a Summer 2027 software co-op.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -49,15 +49,14 @@
       <span aria-hidden="true">·</span>
       <a href="#contact">hello@maxwellrobbins.com</a>
     </p>
-    <p class="status-line" id="worlds-status">Worlds: April 2027 — counting down…</p>
   </section>
 
   <!-- ============ PATH PLANNER DEMO ============ -->
   <section id="demo" class="section" aria-labelledby="demo-h">
-    <h2 id="demo-h"><span class="prompt-char" aria-hidden="true">~/</span>path-planner <span class="h-sub">— try it</span></h2>
-    <p class="section-lede">This is a toy version of my real project: a planner that generates time-optimized
-      autonomous routes for VEX U robots using Hermite splines. <strong>Click the field to drop waypoints</strong>,
-      then hit <em>run path</em> and watch the robot drive the spline.</p>
+    <h2 id="demo-h"><span class="prompt-char" aria-hidden="true">~/</span>path-planner</h2>
+    <p class="section-lede">A small browser version of my path planner. The real one makes time-optimized
+      autonomous routes for VEX U robots with Hermite splines. <strong>Click the field to add points,
+      drag them to move them</strong>, then hit <em>run path</em>.</p>
     <div class="demo-wrap">
       <canvas id="field" width="880" height="420" role="img"
               aria-label="Interactive path planner demo field. Click to add waypoints, then press Run path."></canvas>
@@ -66,8 +65,8 @@
         <button id="clear-btn" type="button" class="btn-ghost">clear points</button>
         <span id="pt-count" class="pt-count" aria-live="polite"></span>
       </div>
-      <p class="demo-note">The real one (Python, cubic/quintic Hermite splines, forward/backward kinematic
-        passes for velocity &amp; acceleration limits) lives at
+      <p class="demo-note">The real project is Python. Cubic and quintic Hermite splines, with forward and
+        backward passes to keep velocity and acceleration in limits. Code:
         <a href="https://github.com/maxsr0/path-planner" target="_blank" rel="noopener">github.com/maxsr0/path-planner</a>.</p>
     </div>
   </section>
@@ -93,19 +92,19 @@
       </article>
       <article class="card">
         <h3><a href="https://prismrobotics.org" target="_blank" rel="noopener">prism-robotics</a></h3>
-        <p>Website for Prism Robotics, the 501(c)(3) VEX U team I co-founded — team info, technical
+        <p>Website for Prism Robotics, the 501(c)(3) VEX U team I co-founded. Team info, technical
            portfolio, and sponsorship outreach. I also lead our fundraising ($1,500+ raised so far).</p>
         <p class="tags">React · nonprofit · VEX U</p>
       </article>
       <article class="card">
         <h3>league-bot</h3>
         <p>A Discord bot that ran a competitive Rocket League esports community and scaled it to
-           1,500+ members — brackets, stats via the Ballchasing API, and a MongoDB backend.</p>
+           1,500+ members. Brackets, stats via the Ballchasing API, and a MongoDB backend.</p>
         <p class="tags">Discord.js · MongoDB · Ballchasing API</p>
       </article>
       <article class="card">
         <h3>plant-monitor</h3>
-        <p>A desktop app plus custom firmware — a sensor project where the hardware and the software
+        <p>A desktop app plus custom firmware. A sensor project where the hardware and the software
            had to work end to end.</p>
         <p class="tags">firmware · desktop · sensors</p>
       </article>
@@ -117,23 +116,24 @@
     <h2 id="about-h"><span class="prompt-char" aria-hidden="true">~/</span>about</h2>
     <div class="about-text">
       <p>I'm a Computer Science freshman in the University of Cincinnati's co-op program (class of 2031),
-         based in Erlanger / Cincinnati, Ohio. I'm looking for a <strong>Summer 2027 software co-op</strong>.</p>
+         based in Cincinnati, Ohio. I'm looking for a <strong>Summer 2027 software co-op</strong>.</p>
       <p>I co-founded <strong>Prism Robotics</strong>, a 501(c)(3) VEX U robotics nonprofit, where I build robot
          software and the team website and lead fundraising as we work toward the VEX World Championship
          in <strong>April 2027</strong>.</p>
-      <p>Outside class I mentor middle school robotics teams — 35+ students and 350+ hours so far — and I'm a
+      <p>Outside class I mentor middle school robotics teams (35+ students, 350+ hours so far), and I'm a
          certified VEX Event Partner and Head Referee. In high school I captained my team to a Kentucky
          State Championship and the Excellence Award.</p>
     </div>
     <div class="card-grid card-grid-2">
       <article class="card card-small">
         <h3>off the keyboard</h3>
-        <p>Chess, mostly losing gracefully on the way up. Chess.com: <strong>bestplayerduck</strong> (~1550).
-           Also: Ohio State football, and games with friends (CS2, Valorant).</p>
+        <p>Chess, mostly losing gracefully on the way up. I play on Chess.com, around 1550 and climbing.
+           Also Ohio State football, and games with friends (CS2, Valorant).</p>
       </article>
       <article class="card card-small">
         <h3>right now</h3>
-        <p id="now-text">Fall 2026: Calc II, Chem, and getting Prism funded for Worlds — April 2027.</p>
+        <p id="now-text">Working on Prism Robotics: building our robots and raising money for Worlds in
+           April 2027. For classes, Calc 2 is the real one this semester.</p>
       </article>
     </div>
   </section>
@@ -142,9 +142,19 @@
   <section id="skills" class="section" aria-labelledby="skills-h">
     <h2 id="skills-h"><span class="prompt-char" aria-hidden="true">~/</span>skills</h2>
     <ul class="skill-list">
-      <li>Java</li><li>Python</li><li>C++</li><li>JavaScript</li><li>React</li>
-      <li>HTML/CSS</li><li>MongoDB</li><li>SQL</li><li>Git</li>
+      <li><button type="button" class="skill-chip" data-skill="java">Java</button></li>
+      <li><button type="button" class="skill-chip" data-skill="python">Python</button></li>
+      <li><button type="button" class="skill-chip" data-skill="cpp">C++</button></li>
+      <li><button type="button" class="skill-chip" data-skill="javascript">JavaScript</button></li>
+      <li><button type="button" class="skill-chip" data-skill="react">React</button></li>
+      <li><button type="button" class="skill-chip" data-skill="htmlcss">HTML/CSS</button></li>
+      <li><button type="button" class="skill-chip" data-skill="mongodb">MongoDB</button></li>
+      <li><button type="button" class="skill-chip" data-skill="sql">SQL</button></li>
+      <li><button type="button" class="skill-chip" data-skill="git">Git</button></li>
     </ul>
+    <div id="skill-detail" class="skill-detail" aria-live="polite">
+      <p class="skill-hint">Click a skill to see where I have used it.</p>
+    </div>
   </section>
 
   <!-- ============ CONTACT ============ -->
@@ -155,14 +165,14 @@
       <li><span class="contact-label">email</span> <a href="mailto:hello@maxwellrobbins.com">hello@maxwellrobbins.com</a></li>
       <li><span class="contact-label">github</span> <a href="https://github.com/maxsr0" target="_blank" rel="noopener">github.com/maxsr0</a></li>
       <li><span class="contact-label">linkedin</span> <a href="https://linkedin.com/in/maxwell-robbins" target="_blank" rel="noopener">linkedin.com/in/maxwell-robbins</a></li>
-      <li><span class="contact-label">resume</span> <a href="#" aria-disabled="true">resume.pdf (coming with launch)</a></li>
+      <li><span class="contact-label">resume</span> <a href="resume.pdf" target="_blank" rel="noopener">resume.pdf</a></li>
     </ul>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <p>© 2026 Maxwell Robbins · Erlanger / Cincinnati, OH · Built with vanilla HTML, CSS, and JS — no frameworks, like the terminal intended.</p>
+  <p>© 2026 Maxwell Robbins · Cincinnati, OH</p>
 </footer>
 
 <script src="main.js"></script>
