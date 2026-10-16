@@ -270,7 +270,7 @@
     python:     { label: "Python", items: [
       { name: "path-planner", url: "https://github.com/maxsr0/path-planner", blurb: "Hermite spline routing for VEX U robots" }
     ] },
-    cpp:        { label: "C++", items: [], note: "What our VEX robots run on (PROS). That code lives with the team." },
+    cpp:        { label: "C++", items: [], note: "What our VEX robots run on (PROS). The code is in the team's private repos." },
     javascript: { label: "JavaScript", items: [
       { name: "league-bot", blurb: "Discord bot for a 1,500+ member Rocket League community" },
       { name: "prism-robotics site", url: "https://prismrobotics.org", blurb: "Team website and sponsorship pages" }
