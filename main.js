@@ -222,49 +222,7 @@
     });
   }
 
-  /* ================= 4. Live GitHub strip ================= */
-  var strip = document.getElementById("gh-strip");
-  if (strip && window.fetch) {
-    fetch("https://api.github.com/users/maxsr0/repos?sort=pushed&per_page=6")
-      .then(function (r) {
-        if (!r.ok) throw new Error("GitHub API " + r.status);
-        return r.json();
-      })
-      .then(function (repos) {
-        if (!repos || !repos.length) throw new Error("no repos");
-        strip.innerHTML = "";
-        repos.slice(0, 3).forEach(function (repo) {
-          var card = document.createElement("article");
-          card.className = "gh-card";
-          var h = document.createElement("h3");
-          var a = document.createElement("a");
-          a.href = repo.html_url;
-          a.target = "_blank";
-          a.rel = "noopener";
-          a.textContent = repo.name;
-          h.appendChild(a);
-          var p = document.createElement("p");
-          p.textContent = repo.description || "No description.";
-          var meta = document.createElement("div");
-          meta.className = "gh-meta";
-          var pushed = new Date(repo.pushed_at);
-          meta.textContent = (repo.language || "code") + " · pushed " +
-            pushed.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
-          card.appendChild(h);
-          card.appendChild(p);
-          card.appendChild(meta);
-          strip.appendChild(card);
-        });
-      })
-      .catch(function () {
-        strip.innerHTML =
-          '<p class="gh-fallback">Couldn\'t reach the GitHub API just now. ' +
-          'My latest work is at <a href="https://github.com/maxsr0" target="_blank" rel="noopener">' +
-          "github.com/maxsr0</a>.</p>";
-      });
-  }
-
-  /* ================= 5. Clickable skills ================= */
+  /* ================= 4. Clickable skills ================= */
   var skillData = {
     java:       { label: "Java", items: [], note: "Mostly coursework so far. Projects land here as I add them." },
     python:     { label: "Python", items: [

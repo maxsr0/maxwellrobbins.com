@@ -216,6 +216,26 @@ button:hover { background: #2ea043; }
 .gh-card p { margin: 0 0 0.4rem; font-size: 0.85rem; color: var(--muted); }
 .gh-meta { font-family: var(--mono); font-size: 0.75rem; color: var(--green); }
 .gh-fallback { color: var(--muted); grid-column: 1 / -1; }
+.priv-badge {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.gh-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-top: 1rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem;
+}
 
 /* ---------- projects / cards ---------- */
 .card-grid {
