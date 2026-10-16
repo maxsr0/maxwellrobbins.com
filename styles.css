@@ -226,17 +226,23 @@ button:hover { background: #2ea043; }
   vertical-align: middle;
   white-space: nowrap;
 }
+/* card frame lives on the wrapping link so the filter below does not invert it */
+a:has(> .gh-chart) {
+  display: block;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
 .gh-chart {
   width: 100%;
   height: auto;
   display: block;
-  margin-top: 1rem;
   /* the chart image only comes in GitHub's light theme; invert + hue-rotate
      turns the empty squares dark while keeping the greens green */
   filter: invert(1) hue-rotate(180deg) saturate(1.15);
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 0.8rem;
 }
 
