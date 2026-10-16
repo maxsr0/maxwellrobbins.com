@@ -226,7 +226,8 @@ button:hover { background: #2ea043; }
   vertical-align: middle;
   white-space: nowrap;
 }
-/* card frame lives on the wrapping link so the filter below does not invert it */
+/* card frame lives on the wrapping link so the filter below does not invert it.
+   The card also breaks out wider than the text column so the chart reads bigger. */
 a:has(> .gh-chart) {
   display: block;
   background: var(--bg-soft);
@@ -234,6 +235,10 @@ a:has(> .gh-chart) {
   border-radius: 8px;
   padding: 0.75rem;
   margin-top: 1rem;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1080px, 94vw);
 }
 .gh-chart {
   width: 100%;
