@@ -58,7 +58,6 @@
     socials:
       "github:   github.com/maxsr0\n" +
       "linkedin: linkedin.com/in/maxwell-robbins\n" +
-      "chess:    chess.com, around 1550 and climbing",
     resume:
       "resume.pdf is linked down in ~/contact. The short version is in 'projects'\n" +
       "and 'about' right here."
