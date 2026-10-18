@@ -202,11 +202,21 @@ button:hover { background: #2ea043; }
 
 /* ---------- github strip ---------- */
 .gh-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: flex;
   gap: 0.8rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.55rem;
+  scrollbar-width: thin;
+  scrollbar-color: #30363d transparent;
 }
+.gh-strip::-webkit-scrollbar { height: 6px; }
+.gh-strip::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+.gh-strip::-webkit-scrollbar-track { background: transparent; }
 .gh-card {
+  flex: 0 0 31.8%;
+  min-width: 230px;
+  scroll-snap-align: start;
   background: var(--bg-soft);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -226,26 +236,7 @@ button:hover { background: #2ea043; }
   vertical-align: middle;
   white-space: nowrap;
 }
-/* card frame lives on the wrapping link so the filter below does not invert it.
-   The card also breaks out wider than the text column so the chart reads bigger. */
-a:has(> .gh-chart) {
-  display: block;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1080px, 94vw);
-}
-.gh-chart {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px;
-}
+
 
 /* ---------- projects / cards ---------- */
 .card-grid {
